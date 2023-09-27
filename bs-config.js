@@ -1,4 +1,4 @@
-module.xports = {
+module.exports = {
     files: ["**/*.{html,css,js}"],
     server: {
         basedir:"."
