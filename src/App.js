@@ -1,6 +1,8 @@
 import NumberCharacters from "./components/compteur.js"
 import ListeCharacters from "./components/liste.js"
 import Title from "./components/titre.js"
+import DetailCharacters from "./components/detail.js";
+
 const characters = require("./characters.json");
 
 function App() {

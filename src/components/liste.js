@@ -1,15 +1,23 @@
-import data from "../characters.json"
+import React, { useState } from 'react';
+import Character from './detail.js'
+
+
 function ListeCharacters({characters}){
-  if (characters.length == 0) {
-    return <p>Pas de personnage</p>;
-  } else {
-    return (
-      <ul>
-        {characters.map((item, index) => (
-          <li key={index}>{item.name}</li>
-        ))}
-      </ul>
-    );
-  }
-}
-export default ListeCharacters;
+  const vide = characters.length > 0;
+
+  const [unCaracter, setSelection] = useState(0);
+  const handleOnClick = (index) => {
+    setSelection(index);
+  };
+    return(
+    
+    vide ? <ul>
+          {characters.map((item, index) => (
+            <li key={item.id} onClick={() => handleOnClick(index)}>{item.name}</li> 
+          ))}
+          <br></br>
+          <Character character = {characters[unCaracter]}/>
+          </ul> : "Il n'y a pas de caractères");
+          }
+
+export default ListeCharacters;                        
