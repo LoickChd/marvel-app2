@@ -1,25 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+import './style.css';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
-function Title({ color = 'red', children, hidden = false, ...props }) {
-  if (hidden) {
-      return null;
-  }
+import routes from './route';
 
-  return (<h1 style={{color: color}} {...props}>{children}</h1>);
-}
+// Create a router that uses the client side history strategy for
+const router = createBrowserRouter(routes)
 
 function App() {
-return (
-  <>
-    {/* 
-        La propriété id et data-demo sont passées au composant Title grâce au spread operator.
-        La propriété color est définie dans le composant Title
-     */}
-    <Title color="blue" id="my-id" data-demo="demo">Hello World</Title>
-    <Title color="red" id="my-id" data-demo="demo">Hello World !</Title>
-  </>
-);
+
+  return (
+    <RouterProvider router={router} />
+  );
 }
 
 export default App;
