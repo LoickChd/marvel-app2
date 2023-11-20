@@ -46,5 +46,5 @@ const CharactersPage = () => {
         </>
     );
 };
-//aa
+//test sonar
 export default CharactersPage;
