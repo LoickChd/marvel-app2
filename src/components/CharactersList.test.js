@@ -51,5 +51,21 @@ describe('CharactersList', () => {
         const characterItems = screen.queryAllByRole('listitem');
         expect(characterItems).toHaveLength(0);
     });
+    describe('CharactersList', () => {
+        it('renders a list of characters with links to their detail pages and formatted dates', () => {
+          render(<CharactersList characters={characters} />, { wrapper: BrowserRouter });
+      
+          characters.forEach((character) => {
+            const link = screen.getByTestId(`character-link-${character.id}`);
+            expect(link).toBeInTheDocument();
+            expect(link).toHaveAttribute('href', `/characters/${character.id}`);
+      
+            const date = new Date(character.modified);
+            const formattedDate = format(date, 'LLLL dd , yyyy');
+            expect(screen.getByText(formattedDate)).toBeInTheDocument();
+          });
+        });
+      });
+
 
 });
