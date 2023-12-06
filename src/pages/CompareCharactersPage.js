@@ -34,6 +34,17 @@ const CompareCharactersPage = () => {
         setOption2(characters[1]);
     }, []);
 
+    if (!option1 || !option2) {
+        return null; // or some loading indicator
+    }
+    
+
+    const data = Object.entries(option1.capacities).map(([key, value]) => ({
+        capacity: key,
+        [option1.name]: value,
+        [option2.name]: option2.capacities[key],
+    }));
+
     return (
         <>
             <h2>Compare characters</h2>
@@ -68,15 +79,22 @@ const CompareCharactersPage = () => {
             <p style={centerStyle}>
             {option1?.name} vs {option2?.name}
             </p>
+            <p style={centerStyle}>
+            {option1?.capacities.force}
+            {option1?.capacities.intelligence}
+            {option1?.capacities.durability}
+            {option1?.capacities.energy}
+            {option1?.capacities.speed}
+            
+            </p>
+            
 
-
-                
-            <RadarChart outerRadius={90} width={730} height={250} data={characters}>
+            <RadarChart outerRadius={90} width={730} height={250} data={data}>
             <PolarGrid />
-            <PolarAngleAxis dataKey="capacities" />
+            <PolarAngleAxis dataKey="capacity" />
             <PolarRadiusAxis angle={30} domain={[0, 150]} />
-            <Radar name={option1?.name} dataKey={option1?.force} stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
-            <Radar name={option2?.name} dataKey={option2?.force} stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
+            <Radar name={option1?.name} dataKey={option1?.capacities} stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
+            <Radar name={option2?.name} dataKey={option2?.capacities} stroke="#82ca9d" fill="#82ca9d" fillOpacity={0.6} />
             </RadarChart>
 
         </>
